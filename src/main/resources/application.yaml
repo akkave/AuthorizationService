@@ -1,3 +1,25 @@
 spring:
   application:
     name: AuthorizationService
+  datasource:
+    url: jdbc:postgresql://localhost:5432/authorization
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+
+# HS256 shared secret — must match what the frontend (or token issuer) uses to sign JWTs.
+# Use at least 32 bytes (256 bits) for production. Override with JWT_SECRET.
+app:
+  jwt:
+    secret: ${JWT_SECRET:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef}
+
+server:
+  port: 8080
